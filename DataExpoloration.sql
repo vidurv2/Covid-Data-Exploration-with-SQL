@@ -42,6 +42,7 @@ SELECT date,SUM(new_cases) as total_cases, SUM(CAST(new_deaths AS UNSIGNED)) as 
 FROM covid.CovidDeaths WHERE continent IS NOT NULL 
 GROUP BY date ORDER BY 1,2 ;
 
+-- Total Deaths vs Continent
 SELECT death.continent,death.location,death.date,death.population,vac.new_vaccinations,
 SUM(CAST(vac.new_vaccinations AS UNSIGNED)) 
 OVER (PARTITION BY death.location ORDER BY death.location,death.date) as RollingVaccinationCount
@@ -50,6 +51,7 @@ JOIN covid.CovidVaccinations vac ON death.location = vac.location AND death.date
 WHERE death.continent IS NOT NULL
 ORDER BY 2,3;
 
+-- Percent population with atleast 1 dose of vaccination
 -- USING Common Table Expressions (CTE) 
 WITH PopvsVac ( continent,location,date,population,new_vaccinations,RollingVaccinationCount) AS
 (
