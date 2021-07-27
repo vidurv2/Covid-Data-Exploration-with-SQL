@@ -91,7 +91,7 @@ FROM covid.CovidDeaths death
 JOIN covid.CovidVaccinations vac ON death.location = vac.location AND death.date = vac.date
 WHERE death.continent IS NOT NULL;
 
-SELECT * FROM PercentPilationVaccinated;
+SELECT * FROM PercentPopulationVaccinated;
 
 
 
